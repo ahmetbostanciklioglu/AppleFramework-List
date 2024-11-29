@@ -2,14 +2,12 @@ import SwiftUI
 
 struct FrameworkDetailView: View {
     
-    var framework: Framework
-    @Binding var isShowingDetailView: Bool
-    @State private var isShowingSafariView = false
+        var framework: Framework
+        @Binding var isShowingDetailView: Bool
+        @State private var isShowingSafariView = false
     
     var body: some View {
         VStack {
-            XDismissButton(isShowingDetailView: $isShowingDetailView)
-            
             Spacer()
             
             FrameworkTitleView(framework: framework)
@@ -23,8 +21,12 @@ struct FrameworkDetailView: View {
             Button {
                 isShowingSafariView = true
             } label: {
-                AFButton(title: "Learn More")
+//                AFButton(title: "Learn More")
+                Label("Learn More", systemImage: "book.fill")
             }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .tint(.red)
         }
         .fullScreenCover(isPresented: $isShowingSafariView) {
             SafariView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
